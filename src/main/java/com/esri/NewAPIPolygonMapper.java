@@ -29,9 +29,8 @@ public class NewAPIPolygonMapper extends Mapper<LongWritable, PolygonFeatureWrit
         val.polygon.queryEnvelope(m_envelope);
         final Point center = m_envelope.getCenter();
         m_text.set(String.format("%.6f\t%.6f\t%s",
-                center.getX(), center.getY(), val.attributes.get(NAME).toString()));
-//        collector.collect(NullWritable.get(), m_text);
-//        context.write(NullWritable.get(), m_text);
+                center.getX(), center.getY(), val.attributes.get(NAME)
+                                                            .toString()));
         context.write(NullWritable.get(), m_text);
     }
 }

@@ -16,12 +16,15 @@ import org.apache.hadoop.util.ToolRunner;
 /**
  * Created by nrobison on 4/20/16.
  */
-public class NewAPIShapefileTool extends Configured implements Tool {
-    public static void main(final String[] args) throws Exception {
+public class NewAPIShapefileTool extends Configured implements Tool
+{
+    public static void main(final String[] args) throws Exception
+    {
         System.exit(ToolRunner.run(new Configuration(), new NewAPIShapefileTool(), args));
     }
 
-    public int run(final String[] args) throws Exception {
+    public int run(final String[] args) throws Exception
+    {
         Configuration hadoopConf = this.getConf();
 
         Job job = Job.getInstance(hadoopConf, NewAPIShapefileTool.class.getSimpleName());
@@ -37,12 +40,10 @@ public class NewAPIShapefileTool extends Configured implements Tool {
 
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         final Path outputDir = new Path(args[1]);
-        outputDir.getFileSystem(hadoopConf).delete(outputDir, true);
+        outputDir.getFileSystem(hadoopConf)
+                 .delete(outputDir, true);
         FileOutputFormat.setOutputPath(job, outputDir);
 
-        return job.waitForCompletion(true)? 0 : 1;
-
-
-
+        return job.waitForCompletion(true) ? 0 : 1;
     }
 }
